@@ -1,0 +1,15 @@
+Tortuga
+avanzar(150)
+gira_izquierda(90)
+avanzar(150)
+gira_izquierda(90)
+avanzar(150)
+gira_izquierda(90)
+avanzar(150)
+gira_derecha(90)
+avanzar(150)
+gira_derecha(90)
+avanzar(150)
+gira_derecha(45)
+avanzar(300)
+Final
