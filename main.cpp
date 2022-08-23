@@ -16,6 +16,8 @@ using namespace std;
 //<DIST>::number
 // --------------------------------------------------------------------
 
+    // First parameter: script.txt
+    // Second parmeter:code_generated;
 int main(){
     Syntax test("testing_class_Syntax.txt","code_python_generated");
     (test.run_code())?cout<<"Succesfully execution\n":cout<<"There was a Mistake in the execution\n";
