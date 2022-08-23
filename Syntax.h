@@ -218,13 +218,21 @@ class Syntax{
             // Bloque y Final
             while(!file_input.eof()){
                 getline(file_input,code_per_line);
-                if(code_per_line=="Final"||code_per_line=="Final\n")break;
-                if(Bloque(code_per_line))code_script_to_python+=code_per_line+'\n';
+                if(!(int)(code_per_line[0]));
+                
+                else if(code_per_line=="Final"||code_per_line=="Final\n")break;
+                else if(Bloque(code_per_line))code_script_to_python+=code_per_line+'\n';
                 else{
                     file_input.close();
-                    std::cout<<"Wrong in Block\n";
+                    std::cout<<"Wrong in Block\n"<<code_per_line<<" Value: "<<(int)(code_per_line[0])<<std::endl;
                     return false;
                 } 
+            }
+            if(code_per_line!="Final"&&code_per_line!="Final\n"){
+                this->code_script_to_python="";
+                file_input.close();
+                return false;
+                
             }
             file_input.close();
             
@@ -256,11 +264,7 @@ class Syntax{
                     instruction_to_run_code_char_array[i]=instruction_to_run_code[i];
                 }
                 instruction_to_run_code_char_array[instruction_to_run_code.size()]='\0';
-                // instruction_to_run_code_char_array[instruction_to_run_code.size()]='\0';
-                // for(int i=0;i<instruction_to_run_code.size();i++){
-                //     std::cout<<instruction_to_run_code_char_array[i];
-                // }
-                // std::cout<<"\nDirectory_finsih\n";
+                
                 system(instruction_to_run_code_char_array);
 
                 return true;
