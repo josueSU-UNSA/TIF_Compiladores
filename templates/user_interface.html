@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="static/main.js"></script>
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"rel="nofollow" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous"> -->
+    <title>Mover a la toruguita</title>
+</head>
+<body>
+    <h1 id="xd">TORTUGITA EN ESPANOL</h1>
+    <form id="myForm" method="post" onsubmit="xd2()">
+        <input type="submit" value="Ejecutar"> <br />
+        <textarea id="codigo" name="queries" rows="23" cols="90">{{ script }}</textarea>
+    </form>
+    <img src="{{url_for('static', filename='taiwan.gif')}}" width="250" />
+</body>
+</html>
