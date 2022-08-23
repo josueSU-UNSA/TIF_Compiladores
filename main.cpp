@@ -19,7 +19,7 @@ using namespace std;
     // First parameter: script.txt
     // Second parmeter:code_generated;
 int main(){
-    Syntax test("testing_class_Syntax.txt","code_python_generated");
+    Syntax test("script.txt","code_generated.py");
     (test.run_code())?cout<<"Succesfully execution\n":cout<<"There was a Mistake in the execution\n";
 
     
