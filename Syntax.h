@@ -66,7 +66,7 @@ class Syntax{
             else return false;
 
 
-            code="t=turtle.Turtle()\nt.shape("+shape+")";
+            code="turtle.shape("+shape+")";
             
             return true;
         }
@@ -104,7 +104,7 @@ class Syntax{
             else return false;
 
 
-            code="t.color("+aux+")\nt.pencolor("+aux+")";
+            code="turtle.color("+aux+")\n\tturtle.pencolor("+aux+")";
             
             return true;
         }
@@ -137,7 +137,7 @@ class Syntax{
             if(!is_number(aux))return false;
 
 
-            code="t.speed("+aux+")";
+            code="turtle.speed("+aux+")";
             
             return true;
         }
@@ -176,7 +176,7 @@ class Syntax{
                 else num+=code[i];    
             }
             if(!is_number(num))return false;
-            movement="t."+movement+"("+num+")";
+            movement="turtle."+movement+"("+num+")";
             code=movement;
             return true;
         }
@@ -192,9 +192,12 @@ class Syntax{
         bool analisis(){
             std::ifstream file_input;
 
+
+
+
             // std::string code_script_to_python;//Code python
             std::string code_per_line;//Aux to iterate all txt
-            this->code_script_to_python+="import turtle\nwindows=turtle.Screen()\n";
+            this->code_script_to_python+="import turtle\nfrom TurtleGIF import TurtleGIF\ndef draw_func(self):\n";
             
             // "import turtle
             // windows=turtle.Screen()
@@ -208,7 +211,7 @@ class Syntax{
             
             // Inicio
             getline(file_input,code_per_line);
-            if(Inicio(code_per_line))code_script_to_python+=code_per_line+'\n';
+            if(Inicio(code_per_line))code_script_to_python+='\t'+code_per_line+'\n';
             else {
                 std::cout<<"Wrong in Begin\n";
                 file_input.close();
@@ -221,10 +224,9 @@ class Syntax{
                 if(!(int)(code_per_line[0]));
                 
                 else if(code_per_line=="Final"||code_per_line=="Final\n")break;
-                else if(Bloque(code_per_line))code_script_to_python+=code_per_line+'\n';
+                else if(Bloque(code_per_line))code_script_to_python+='\t'+code_per_line+'\n';
                 else{
                     file_input.close();
-                    std::cout<<"Wrong in Block\n"<<code_per_line<<" Value: "<<(int)(code_per_line[0])<<std::endl;
                     return false;
                 } 
             }
@@ -239,7 +241,8 @@ class Syntax{
 
 
 
-            code_script_to_python+="windows.mainloop()";
+            code_script_to_python+="\tturtle.bye()\n";
+            code_script_to_python+="TurtleGIF.draw = draw_func\nnewturtle = TurtleGIF(2, name = \"img\")\nturtle.Screen().setup(1000,1000)\nnewturtle.record(fps=10)";
 
             return true;
         }
