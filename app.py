@@ -16,7 +16,7 @@ def coder():
         global script 
         script = data
         # os.system("g++ archivo.cpp")
-        os.system("python ../Tortuga/script.py")
+        os.system("python code_generated.py")
         return redirect(url_for("coder"))
     return render_template('user_interface.html')
 
