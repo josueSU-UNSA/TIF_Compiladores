@@ -44,6 +44,8 @@ class Syntax{
             // file_create_py.close();
             // this->m_number_line=0;
         }
+        
+
         bool Inicio(std::string &code){
             std::string shape="";
             
@@ -62,12 +64,95 @@ class Syntax{
             else if(shape=="Triangulo")shape="\"triangle\"";
             else if(shape=="Clasico")  shape="\"classic\"";
             else return false;
+
+
             code="t=turtle.Turtle()\nt.shape("+shape+")";
             
             return true;
         }
-        bool Bloque(std::string &code){
+        bool color(std::string &code){
+            std::string aux="";
+            int i=0;
+            for(;i<code.size();i++){
+                if(code[i]=='='){
+                    i++;
+                    break;
+                    
+                }
+                aux+=code[i];
             
+            }
+            if(aux!="Color")return false;
+            aux="";
+            for(;i<code.size();i++){
+                
+                aux+=code[i];
+            
+            }
+        //"red" 
+        //"purple"
+        //"brown"
+        //"pink",
+        //"green"
+
+
+            if(aux=="rojo")aux="\"red\"";
+            else if(aux=="purpura") aux="\"purple\"";
+            else if(aux=="marron")   aux="\"brown\"";
+            else if(aux=="rosado")  aux="\"pink\"";
+            else if(aux=="verde")aux="\"green\"";
+            else return false;
+
+
+            code="t.color("+aux+")\nt.pencolor("+aux+")";
+            
+            return true;
+        }
+        bool velocidad(std::string &code){
+            std::string aux="";
+            int i=0;
+            for(;i<code.size();i++){
+                if(code[i]=='='){
+                    i++;
+                    break;
+                    
+                }
+                aux+=code[i];
+            
+            }
+            if(aux!="Velocidad")return false;
+            aux="";
+            for(;i<code.size();i++){
+                
+                aux+=code[i];
+            
+            }
+        //Number
+        //Más rápido: 0
+        // Más lento: 1
+        // lento : 3
+        // normales: 6
+        // Rápido: 10
+
+            if(!is_number(aux))return false;
+
+
+            code="t.speed("+aux+")";
+            
+            return true;
+        }
+
+
+        bool Bloque(std::string &code){
+            std::string aux=code;
+            if(velocidad(aux)){
+                code=aux;
+                return true;
+            }
+            if(color(aux)){
+                code=aux;
+                return true;
+            }
             std::string movement="";
             int i=0;
             for(;i<code.size();i++){
@@ -124,14 +209,22 @@ class Syntax{
             // Inicio
             getline(file_input,code_per_line);
             if(Inicio(code_per_line))code_script_to_python+=code_per_line+'\n';
-            else return false;
+            else {
+                std::cout<<"Wrong in Begin\n";
+                file_input.close();
+                return false;
+            }
 
             // Bloque y Final
             while(!file_input.eof()){
                 getline(file_input,code_per_line);
                 if(code_per_line=="Final"||code_per_line=="Final\n")break;
                 if(Bloque(code_per_line))code_script_to_python+=code_per_line+'\n';
-                else return false;
+                else{
+                    file_input.close();
+                    std::cout<<"Wrong in Block\n";
+                    return false;
+                } 
             }
             file_input.close();
             
