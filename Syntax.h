@@ -56,7 +56,7 @@ class Syntax{
                 }
                 else shape+=code[i];    
             }
-            
+            std::cout<<shape<<std::endl;
             if(shape=="Tortuga")shape="\"turtle\"";
             else if(shape=="Cuadrado") shape="\"square\"";
             else if(shape=="Flecha")   shape="\"arrow\"";
@@ -242,7 +242,7 @@ class Syntax{
 
 
             code_script_to_python+="\tturtle.bye()\n";
-            code_script_to_python+="TurtleGIF.draw = draw_func\nnewturtle = TurtleGIF(2, name = \"img\")\nturtle.Screen().setup(1000,1000)\nnewturtle.record(fps=10)";
+            code_script_to_python+="TurtleGIF.draw = draw_func\nnewturtle = TurtleGIF(2, name = \"img\")\nturtle.Screen().setup(1500,1500)\nnewturtle.record(fps=10)";
 
             return true;
         }
@@ -268,7 +268,7 @@ class Syntax{
                 }
                 instruction_to_run_code_char_array[instruction_to_run_code.size()]='\0';
                 
-                system(instruction_to_run_code_char_array);
+                // system(instruction_to_run_code_char_array);
 
                 return true;
             }
